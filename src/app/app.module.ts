@@ -1,3 +1,4 @@
+import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -70,7 +71,9 @@ import { DataTablesModule } from 'angular-datatables';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+  ApiService,
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
