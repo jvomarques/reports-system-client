@@ -6,15 +6,14 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
-// import { CacheService } from './cache.service';
-// import { UiService } from './ui-service.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private readonly API = `${environment.API}`;
+  private readonly API = `${environment.API}`+'/api';
 
 
   constructor(private http: Http, 
@@ -42,7 +41,6 @@ export class ApiService {
   }
 
   request(url: string, method: RequestMethod, body?: Object) {
-
     const headers = new Headers();
     const jwt = localStorage.getItem('token');
 
@@ -62,7 +60,6 @@ export class ApiService {
     }
 
     const request = new Request(requestOptions);
-
     return this.http.request(request)
       .pipe(
         map((res: Response) => res.json()))

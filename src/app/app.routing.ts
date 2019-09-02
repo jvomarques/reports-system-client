@@ -8,6 +8,8 @@ import { P404Component } from './pages/error/404.component';
 import { P500Component } from './pages/error/500.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -52,7 +54,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'painelControle',
-        loadChildren: () => import('./pages/painelControle/painelControle.module').then(m => m.PainelControleModule)
+        loadChildren: () => import('./pages/painelControle/painelControle.module').then(m => m.PainelControleModule),
+        canLoad:[AdminGuard, AuthGuard],
+        
       },
       {
         path: 'base',

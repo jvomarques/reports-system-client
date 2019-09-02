@@ -1,5 +1,7 @@
 import { ApiService } from './services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { HttpModule } from '@angular/http';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,6 +49,8 @@ import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
@@ -57,7 +62,9 @@ import { DataTablesModule } from 'angular-datatables';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    DataTablesModule.forRoot()
+    DataTablesModule.forRoot(),
+    HttpModule,
+    
     
   ],
   declarations: [
@@ -70,7 +77,9 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    useClass: HashLocationStrategy,
+    
+
   },
   ApiService,
   ],
