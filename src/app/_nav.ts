@@ -67,6 +67,12 @@ export const navItems: NavData[] = [
         url: '/painelControle/usuario',
         icon: 'icon-user'
       },
+      {
+        name: 'Pefil',
+        url: '/painelControle/perfil',
+        icon: 'icon-user'
+      },
+      
 
     ]
   },

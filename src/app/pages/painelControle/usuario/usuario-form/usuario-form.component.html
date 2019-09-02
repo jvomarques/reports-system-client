@@ -1,8 +1,8 @@
 <div class="animated fadeIn">
     
-    <div class="row">
+    <!-- <div class="row">
       
-      <div class="col-md-12">
+      <div class="col-md-12"> -->
         
         <div class="card">
           <div class="card-header">
@@ -10,84 +10,70 @@
           </div>
           <div class="card-body">
             <form [formGroup]="resourceForm">
-              <div class="form-group">
-                <label for="nome">Nome</label>
-                <input formControlName="nome" type="text" id="nome" name="nome" class="form-control" placeholder="Nome" >
+              <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="nome">Nome</label>
+                    <input formControlName="nome" type="text" id="nome" name="nome" 
+                    [ngClass]="{'is-valid': this.resourceForm.get('nome').value, 'is-invalid' : !this.resourceForm.get('nome').value }"
+                    class="form-control" placeholder="Nome" >
+                    <div *ngIf="!this.resourceForm.get('nome').value" class="invalid-feedback">
+                      Campo obrigatório
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="login">Login</label>
+                    <input formControlName="login" type="text" id="login" name="login" 
+                    [ngClass]="{'is-valid': this.resourceForm.get('login').value, 'is-invalid' : !this.resourceForm.get('login').value }"
+                    class="form-control" placeholder="Login" >
+                    <div *ngIf="!this.resourceForm.get('login').value" class="invalid-feedback">
+                      Campo obrigatório
+                    </div>
+                  </div>
               </div>
-              <div class="form-group">
-                <label for="login">Login</label>
-                <input formControlName="login" type="text" id="login" name="login" class="form-control" placeholder="Login" >
+              <div class="row">
+                  <div class="form-group col-md-6">
+                      <label for="senha">Senha</label>
+                      <input formControlName="senha" type="password" id="senha" name="senha"
+                      class="form-control"
+                      [ngClass]="{'is-valid': this.resourceForm.get('senha').value, 'is-invalid' : !this.resourceForm.get('senha').value }"
+                      placeholder="*****" autocomplete="current-password">
+                      <div *ngIf="!this.resourceForm.get('senha').value" class="invalid-feedback">
+                        Campo obrigatório
+                      </div>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                      <label for="perfil">Perfis</label>
+                      <ng-select [disabled]="false" [items]="resPerfis" bindLabel="descricao" bindValue="descricao"
+                        formControlName="idPerfil" placeholder="Selecione um Cargo"
+                        [ngClass]="{ 'is-invalid': resourceForm.errors }">
+                      </ng-select>
+                      <!-- <app-form-field-error [form-control]="resourceForm.get('idCargo')"></app-form-field-error> -->
+                      <div class="erroMensagem" id="jaAddCargo"></div>
+                    </div>
+                    <!-- <div class="form-group col-md-1">
+                      <label for="acao">Ação</label>
+                      <button [disabled]="desabilitaBotaoAdicionarCargo" (click)="verificarSeCargoAdicionadoPossuiCarreira()"
+                        type="button" class="btn btn-default btn-circle form-control" title="Adicionar Cargo">
+                        <i class="fa fa-plus btn-circle-icon"></i>
+                      </button>
+                    </div> -->
               </div>
-              <div class="form-group">
-                <label for="senha">Senha</label>
-                <input formControlName="senha" type="password" id="senha" name="senha" class="form-control" placeholder="*****" autocomplete="current-password">
-              </div>
+
 
             </form>
           </div>
           <div class="card-footer">
             <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Limpar</button>
-            <button (click)="salvar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Enviar</button>
+            <button *ngIf="this.tipoTela == 'Cadastrar'" (click)="salvar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
+            <button *ngIf="this.tipoTela == 'Editar'"  (click)="atualizar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Editar</button>
           </div>
         </div>
 
-      </div><!--/.col-->
-    </div><!--/.row-->
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-header">
-            <strong>Validation states</strong> Form
-          </div>
-          <form>
-            <div class="card-body">
-              <div class="form-group">
-                <label class="form-col-form-label" for="inputSuccess1">Input with success</label>
-                <input type="text" class="form-control is-valid" id="inputSuccess1">
-                <div class="valid-feedback">
-                  Input is valid.
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-col-form-label" for="inputError1">Input with error</label>
-                <input type="text" class="form-control is-invalid" id="inputError1">
-                <div class="invalid-feedback">
-                  Please provide a valid information.
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-header">
-            <strong>Validation </strong> <code>was-validated</code>
-          </div>
-          <div class="card-body">
-            <form class="was-validated">
-              <div class="form-group">
-                <label class="form-col-form-label" for="inputSuccess2">Input is valid</label>
-                <input type="text" class="form-control is-valid" id="inputSuccess2">
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-col-form-label" for="inputError2">Input required</label>
-                <input type="text" class="form-control" id="inputError2" required>
-                <div class="valid-feedback">
-                  Input is valid.
-                </div>
-                <div class="invalid-feedback">
-                  Please provide a valid information.
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div><!--/.col-->
-    </div>
-    
+      <!-- </div> -->
+      <!--/.col-->
+    <!-- </div> -->
+    <!--/.row-->
+
   </div>
   

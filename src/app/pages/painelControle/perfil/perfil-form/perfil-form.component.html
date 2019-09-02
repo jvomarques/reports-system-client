@@ -1,0 +1,36 @@
+<div class="animated fadeIn">
+    
+    <div class="row">
+      
+      <div class="col-md-12">
+        
+        <div class="card">
+          <div class="card-header">
+            <strong>{{tipoTela}}</strong> Perfil
+          </div>
+          <div class="card-body">
+            <form [formGroup]="resourceForm">
+              <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input formControlName="descricao" type="text" id="descricao" name="descricao" 
+                [ngClass]="{'is-valid': this.resourceForm.get('descricao').value, 'is-invalid' : !this.resourceForm.get('descricao').value }"
+                class="form-control" placeholder="descricao" >
+                <div *ngIf="!this.resourceForm.get('descricao').value" class="invalid-feedback">
+                  Campo obrigatório
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="reset" class="btn btn-sm btn-danger" (click)="limpar()"><i class="fa fa-ban"></i> Limpar</button>
+            <button *ngIf="this.tipoTela == 'Cadastrar'" (click)="salvar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
+            <button *ngIf="this.tipoTela == 'Editar'"  (click)="atualizar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Editar</button>
+          </div>
+        </div>
+
+      </div><!--/.col-->
+    </div><!--/.row-->
+
+  </div>
+  

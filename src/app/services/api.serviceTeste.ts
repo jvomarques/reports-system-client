@@ -2,8 +2,8 @@ import { Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
-// import { CookieService } from 'ngx-cookie-service';
-// import { BaseModel } from '../../models/_base/baseModel';
+import { CookieService } from 'ngx-cookie-service';
+import { BaseModel } from '../models/baseModel';
 
 declare var $: any;
 export class BaseService<T extends BaseModel> {

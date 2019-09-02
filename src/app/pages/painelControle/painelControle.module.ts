@@ -12,6 +12,8 @@ import { PainelControleRoutingModule } from './painelControle-routing.module';
 import { UsuarioListComponent } from './usuario/usuario-list/usuario-list.component';
 import { DataTablesModule } from 'angular-datatables';
 import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
+import { PerfilListComponent } from './perfil/perfil-list/perfil-list.component';
+import { PerfilFormComponent } from './perfil/perfil-form/perfil-form.component';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.compon
   declarations: [
     UsuarioListComponent,
     UsuarioFormComponent,
+    PerfilListComponent,
+    PerfilFormComponent,
 
   ]
 })

@@ -66,6 +66,7 @@ import { DataTablesModule } from 'angular-datatables';
     HttpModule,
     
     
+    
   ],
   declarations: [
     AppComponent,
