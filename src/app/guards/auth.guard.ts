@@ -21,7 +21,7 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   private verificarAcesso(){
     
-    if (this.authService.usuarioEstaAutenticado(localStorage.getItem('token'))) 
+    if (this.authService.usuarioEstaAutenticado(localStorage.getItem('tokenExpiration'))) 
       return true;
 
     this.router.navigate(['login']);

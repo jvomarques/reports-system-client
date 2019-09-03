@@ -55,7 +55,7 @@ export const routes: Routes = [
       {
         path: 'painelControle',
         loadChildren: () => import('./pages/painelControle/painelControle.module').then(m => m.PainelControleModule),
-        
+        canLoad:[AdminGuard, AuthGuard],
         
       },
       {

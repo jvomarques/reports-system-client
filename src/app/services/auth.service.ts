@@ -49,17 +49,23 @@ export class AuthService {
   }
 
   usuarioEstaAutenticado(tokenExpiration?: string):boolean{
-    // const date = this.getTokenExpirationDate(tokenExpiration);
     
-    // const tokenExpirationDate = new Date(tokenExpiration);
-    // console.log(tokenExpirationDate);
+    let tokenExpirationDate = new Date(tokenExpiration);
+    const now = new Date();
+    if(new Date(tokenExpiration) >= now)
+      return true;
 
-    // if(tokenExpirationDate === undefined) return false;
-    // return !(tokenExpirationDate.valueOf() > new Date().valueOf());
-    return true;
+    return false;
   }
 
   usuarioEhAdmin():boolean{
+    let perfis = localStorage.getItem('perfil');
+
+    // perfis.forEach(perfil => {
+    //   if(perfil == "Administrator")
+    //     return true;
+    // });
+
     return true;  
   }
 
