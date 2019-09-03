@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(){
+    localStorage.clear();
     this.buildResourceForm();
   }
 

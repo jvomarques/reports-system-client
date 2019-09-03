@@ -58,14 +58,7 @@ export const routes: Routes = [
         canLoad:[AdminGuard, AuthGuard],
         
       },
-      {
-        path: 'base',
-        loadChildren: () => import('./pages/base/base.module').then(m => m.BaseModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./pages/buttons/buttons.module').then(m => m.ButtonsModule)
-      },
+
       {
         path: 'charts',
         loadChildren: () => import('./pages/chartjs/chartjs.module').then(m => m.ChartJSModule)
@@ -75,21 +68,11 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'icons',
-        loadChildren: () => import('./pages/icons/icons.module').then(m => m.IconsModule)
+        path: 'sair',
+        redirectTo: '/login'
       },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./pages/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./pages/theme/theme.module').then(m => m.ThemeModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./pages/widgets/widgets.module').then(m => m.WidgetsModule)
-      }
+  
+  
     ]
   },
   { path: '**', component: P404Component }
