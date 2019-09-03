@@ -46,7 +46,12 @@ export class ApiService {
   
 
   post(url: string, body: Object) {
-    return this.request(url, RequestMethod.Post, body);
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new Headers(this.getHeadersAuthorization()), 
+    };
+    
+    return this.http.post(`${this.API}/${url}`, body ,requestOptions).pipe(
+      map((res: Response) => res.json()))
   }
 
   put(url: string, body: Object) {
@@ -116,7 +121,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
-      'Authorization': 'bearer ' + token
+      'Authorization': 'Bearer ' + token
     }
 
     return header;
