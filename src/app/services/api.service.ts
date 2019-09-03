@@ -55,7 +55,14 @@ export class ApiService {
   }
 
   put(url: string, body: Object) {
-    return this.request(url, RequestMethod.Put, body);
+    // return this.request(url, RequestMethod.Put, body);
+
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new Headers(this.getHeadersAuthorization()), 
+    };
+    
+    return this.http.put(`${this.API}/${url}`, body ,requestOptions).pipe(
+      map((res: Response) => res.json()))
   }
 
   delete(url: string) {

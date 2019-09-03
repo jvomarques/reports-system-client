@@ -45,6 +45,8 @@ export class PerfilListComponent {
   protected getPerfis(){
     this.apiService.get('perfil').subscribe(
       res => {
+        this.registrarLog('perfil-list','list')
+
         console.log(res);
         this.perfis = res;
       }
@@ -71,11 +73,14 @@ export class PerfilListComponent {
       .then((result) => {
         if (result.value) {
           // const firstObject = Object.keys(resource)[0];
-          this.apiService.delete('usuario/' + resource.id).subscribe(
+          this.apiService.delete('perfil/' + resource.id).subscribe(
             () => {
+              this.registrarLog('perfil-list','delete')
+
               this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
               this.perfis = this.perfis.filter(element => element != resource);
               console.log(this.perfis);
+
             }, (fail) => {
               const mensagem = fail.error.Mensagem || fail.error.mensagem || 'Error no serviço! Entre em contato com a informática.';
               this.messageService.customMessage('AVISO!', mensagem, 'warning');
@@ -83,6 +88,27 @@ export class PerfilListComponent {
           );
         }
       });
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.apiService.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }

@@ -90,12 +90,13 @@ export class PerfilFormComponent {
   atualizar():void{
     if(this.validarForm())
     {
-      this.registrarLog('perfil-form', 'put');
       
       const id = this.route.snapshot.url[0].path;
       this.service.put('perfil/'+ id, this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
+          this.registrarLog('perfil-form', 'put');
+
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }

@@ -21,6 +21,8 @@ const routes: Routes = [
         children: [
           { path: "", component: RelatorioListComponent, data: { title: 'Relatório'} },
           { path: "new", component: RelatorioFormComponent, data: { title: 'Relatório'} },
+          { path: ":id/edit", component: RelatorioFormComponent, data: { title: 'Relatório'} }
+
         ]
       }
     ]

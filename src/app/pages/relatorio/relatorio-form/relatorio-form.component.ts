@@ -53,13 +53,16 @@ export class RelatorioFormComponent {
       'conteudo': new FormControl(null, [Validators.required]),
       'dataEnvio': new FormControl(null, [Validators.required]),
       'idAtividade': new FormControl(null, [Validators.required]),
+      'idUsuario': new FormControl(null, [Validators.required]),
     });
 
   }
 
   validarForm(): boolean {
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
     this.resourceForm.patchValue({
-      dataEnvio: new Date()
+      dataEnvio: new Date(),
+      idUsuario: usuario.id
     })
     return (this.resourceForm.valid) ? true : false;
   }
@@ -72,13 +75,14 @@ export class RelatorioFormComponent {
         this.tipoTela = 'Editar';
         
         const id = this.route.snapshot.url[0].path;
-        this.service.getById('atividade', id).subscribe(
+        this.service.getById('relatorio', id).subscribe(
           res => {
             console.log(res);
             this.resourceForm.patchValue({
               id: res.id,
               descricao: res.descricao,
               conteudo: res.descricao,
+              idAtividade: res.idAtividade,
             })
           }
         )
@@ -94,7 +98,7 @@ export class RelatorioFormComponent {
     if(this.validarForm())
     {
       console.log(this.resourceForm);
-      this.service.post('atividade',this.resourceForm.value).subscribe(
+      this.service.post('relatorio',this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
@@ -112,7 +116,7 @@ export class RelatorioFormComponent {
     {
       console.log(this.resourceForm);
       const id = this.route.snapshot.url[0].path;
-      this.service.put('atividade/'+ id, this.resourceForm.value).subscribe(
+      this.service.put('relatorio/'+ id, this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');

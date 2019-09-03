@@ -22,6 +22,7 @@ export class AtividadeListComponent {
   ) { }
 
   ngOnInit(){
+    this.registrarLog('atividade-list','list')
 
     this.dtOptions = {
       responsive: true,
@@ -61,6 +62,7 @@ export class AtividadeListComponent {
           
           this.apiService.delete('atividade/' + resource.id).subscribe(
             () => {
+              this.registrarLog('atividade-list','delete')
               this.messageService.successMessage('Sucesso', 'Exclusão processada com sucesso');
               this.atividades = this.atividades.filter(element => element != resource);
               console.log(this.atividades);
@@ -71,6 +73,27 @@ export class AtividadeListComponent {
           );
         }
       });
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.apiService.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }

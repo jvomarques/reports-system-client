@@ -80,6 +80,8 @@ export class AtividadeFormComponent {
       this.service.post('atividade',this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
+          this.registrarLog('atividade-post','put')
+
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }
@@ -98,6 +100,8 @@ export class AtividadeFormComponent {
       this.service.put('atividade/'+ id, this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
+          this.registrarLog('atividade-form','put')
+
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }
@@ -110,6 +114,27 @@ export class AtividadeFormComponent {
 
   limpar():void{
     this.resourceForm.reset();
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.service.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }
