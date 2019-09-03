@@ -17,6 +17,7 @@ export class RelatorioFormComponent {
   tipoTela:any;
   resourceForm: FormGroup;
   protected formBuilder: FormBuilder;
+  resAtividades:Array<any> = [];
 
   messageService: MessageService = new MessageService();
 
@@ -31,6 +32,17 @@ export class RelatorioFormComponent {
   ngOnInit(){
     this.buildResourceForm();
     this.verificarTipoAcao();
+    this.getAtividades();
+
+  }
+
+  protected getAtividades(){
+    this.service.get('atividade').subscribe(
+      res => {
+        console.log(res);
+        this.resAtividades = res;
+      }
+    )
   }
 
   buildResourceForm() {
@@ -38,13 +50,17 @@ export class RelatorioFormComponent {
     this.resourceForm = new FormGroup({
       'id': new FormControl(0),
       'descricao': new FormControl(null, [Validators.required]),
-      'dataInicio': new FormControl(null, [Validators.required]),
-      'dataFim': new FormControl(null, [Validators.required]),
+      'conteudo': new FormControl(null, [Validators.required]),
+      'dataEnvio': new FormControl(null, [Validators.required]),
+      'idAtividade': new FormControl(null, [Validators.required]),
     });
 
   }
 
   validarForm(): boolean {
+    this.resourceForm.patchValue({
+      dataEnvio: new Date()
+    })
     return (this.resourceForm.valid) ? true : false;
   }
 
@@ -62,6 +78,7 @@ export class RelatorioFormComponent {
             this.resourceForm.patchValue({
               id: res.id,
               descricao: res.descricao,
+              conteudo: res.descricao,
             })
           }
         )
@@ -110,6 +127,27 @@ export class RelatorioFormComponent {
 
   limpar():void{
     this.resourceForm.reset();
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.service.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }

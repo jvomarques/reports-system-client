@@ -6,13 +6,13 @@ import { MessageService } from '../../../services/message.service';
 
 
 @Component({
-  templateUrl: 'atividadeRelatorio-list.component.html'
+  templateUrl: 'relatorio-list.component.html'
 })
-export class AtividadeRelatorioListComponent {
+export class RelatorioListComponent {
 
   dtOptions: DataTables.Settings = {};
 
-  atividades: Array<any> = [];
+  relatorios: Array<any> = [];
 
   messageService: MessageService = new MessageService();
 
@@ -39,14 +39,14 @@ export class AtividadeRelatorioListComponent {
       
     };
 
-    this.getAtividades();
+    this.getRelatorios();
   }
 
-  protected getAtividades(){
-    this.apiService.get('atividade').subscribe(
+  protected getRelatorios(){
+    this.apiService.get('relatorio').subscribe(
       res => {
         console.log(res);
-        this.atividades = res;
+        this.relatorios = res;
       }
     )
   }
@@ -59,11 +59,11 @@ export class AtividadeRelatorioListComponent {
       .then((result) => {
         if (result.value) {
           
-          this.apiService.delete('atividade/' + resource.id).subscribe(
+          this.apiService.delete('relatorio/' + resource.id).subscribe(
             () => {
               this.messageService.successMessage('Sucesso', 'Exclusão processada com sucesso');
-              this.atividades = this.atividades.filter(element => element != resource);
-              console.log(this.atividades);
+              this.relatorios = this.relatorios.filter(element => element != resource);
+              console.log(this.relatorios);
             }, (fail) => {
               
               this.messageService.errorMessage('AVISO!', 'Não foi possível realizar exclusão.');

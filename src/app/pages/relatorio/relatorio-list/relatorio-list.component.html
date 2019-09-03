@@ -7,25 +7,22 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i> Atividades
+            <i class="fa fa-align-justify"></i> Meus Relatórios
             <a [routerLink]="['../new']" class="btn btn-info float-right btn-sm">
               <i class="fa fa-plus" style="color:white"> Novo</i>
             </a>
           </div>
           <div class="card-body">
-            <table datatable [dtOptions]="dtOptions" class="table table-striped" *ngIf='atividades && atividades.length'>
+            <table datatable [dtOptions]="dtOptions" class="table table-striped" *ngIf='relatorios && relatorios.length'>
               <thead>
                 <tr>
                   <th class="text-center">#</th>
                   <th class="text-center">Descrição</th>
-                  <th class="text-center">Início</th>
-                  <th class="text-center">Fim</th>
-                  <th class="text-center">Ações</th>
-
+                  <th class="text-center">Atividade</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let res of atividades; index as i">
+                <tr *ngFor="let res of relatorios; index as i">
                   <td class="text-center">
                     <small>{{i+1}}</small>
                   </td>
@@ -33,15 +30,15 @@
                     <small>{{res.descricao}}</small>
                   </td>
                   <td class="text-center">
-                    <small>{{res.dataInicio}}</small>
+                    <small>{{res.idAtividade}}</small>
                   </td>
                   <td class="text-center">
-                    <small>{{res.dataFim}}</small>
-                  </td>
-                  <td class="text-center">
-                      <button [routerLink]="[res.id, 'new']"
+                      <button [routerLink]="[res.id, 'edit']"
                         class="btn btn-outline-primary btn-sm mr-2 d-inline">
-                        Enviar relatório
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button (click)="deleteResource(res)" class="btn btn-outline-danger btn-sm d-inline">
+                        <i class="fa fa-trash"></i>
                       </button>
                   </td>
                 </tr>
@@ -49,14 +46,12 @@
       
             </table>
 
-            <table datatable [dtOptions]="dtOptions" class="table table-striped" *ngIf='atividades.length == 0'>
+            <table datatable [dtOptions]="dtOptions" class="table table-striped" *ngIf='relatorios.length == 0'>
               <thead class="thead-light">
                 <tr>
                   <th class="text-center">#</th>
                   <th class="text-center">Descrição</th>
-                  <th class="text-center">Início</th>
-                  <th class="text-center">Fim</th>
-                  <th class="text-center">Ações</th>
+                  <th class="text-center">Atividade</th>
                 </tr>
               </thead>
   

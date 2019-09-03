@@ -1,5 +1,5 @@
+import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
 import { RelatorioFormComponent } from './relatorio-form/relatorio-form.component';
-import { AtividadeRelatorioListComponent } from './atividadeRelatorio-list/atividadeRelatorio-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -14,12 +14,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'atividadesRelatorio'
+        redirectTo: 'relatorio'
       },
       {
-        path: 'atividadesRelatorio',
+        path: 'relatorio',
         children: [
-          { path: "", component: AtividadeRelatorioListComponent, data: { title: 'MinhasAtividades'} },
+          { path: "", component: RelatorioListComponent, data: { title: 'Relatório'} },
           { path: "new", component: RelatorioFormComponent, data: { title: 'Relatório'} },
         ]
       }

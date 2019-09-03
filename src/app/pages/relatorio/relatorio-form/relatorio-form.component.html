@@ -6,12 +6,21 @@
         
         <div class="card">
           <div class="card-header">
-            <strong>{{tipoTela}}</strong> Atividade
+            <strong>{{tipoTela}}</strong> Relatório
           </div>
           <div class="card-body">
             <form [formGroup]="resourceForm">
                 <div class="row">
-                    <div class="form-group col-md-12">
+                      <div class="form-group col-md-6">
+                        <label for="nome">Conteúdo</label>
+                        <input formControlName="conteudo" type="text" id="conteudo" name="conteudo" 
+                        [ngClass]="{'is-valid': this.resourceForm.get('conteudo').value, 'is-invalid' : !this.resourceForm.get('conteudo').value }"
+                        class="form-control" placeholder="Conteúdo" >
+                        <div *ngIf="!this.resourceForm.get('conteudo').value" class="invalid-feedback">
+                          Campo obrigatório
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
                         <label for="nome">Descrição</label>
                         <input formControlName="descricao" type="text" id="descricao" name="descricao" 
                         [ngClass]="{'is-valid': this.resourceForm.get('descricao').value, 'is-invalid' : !this.resourceForm.get('descricao').value }"
@@ -22,24 +31,16 @@
                       </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="dataInicio">Início</label>
-                        <input formControlName="dataInicio" type="date" id="dataInicio" name="dataInicio" 
-                        [ngClass]="{'is-valid': this.resourceForm.get('dataInicio').value, 'is-invalid' : !this.resourceForm.get('dataInicio').value }"
-                        class="form-control" placeholder="" >
-                        <div *ngIf="!this.resourceForm.get('dataInicio').value" class="invalid-feedback">
-                          Campo obrigatório
-                        </div>
-                      </div>
                       <div class="form-group col-md-6">
-                        <label for="dataFim">Fim</label>
-                        <input formControlName="dataFim" type="date" id="dataFim" name="dataFim" 
-                        [ngClass]="{'is-valid': this.resourceForm.get('dataFim').value, 'is-invalid' : !this.resourceForm.get('dataFim').value }"
-                        class="form-control" placeholder="dataFim" >
-                        <div *ngIf="!this.resourceForm.get('dataFim').value" class="invalid-feedback">
-                          Campo obrigatório
+                        <label for="atividade">Atividade</label>
+                        <select  class="form-control" id="idAtividade" formControlName="idAtividade" [ngClass]="{'is-valid': this.resourceForm.get('idAtividade').value, 'is-invalid' : !this.resourceForm.get('idAtividade').value }">
+                          <option value="" selected disabled >Escolha uma atividade</option>
+                          <option *ngFor="let atividade of resAtividades; index as i" [ngValue]="atividade.id">{{atividade.descricao}}</option>
+                        </select>
+                        <div *ngIf="!this.resourceForm.get('idAtividade').value" class="invalid-feedback">
+                            Campo obrigatório
                         </div>
-                      </div>
+                    </div>
                   </div>
 
             </form>

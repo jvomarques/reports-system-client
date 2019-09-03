@@ -1,3 +1,4 @@
+import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
 import { RelatorioFormComponent } from './relatorio-form/relatorio-form.component';
 import { RelatorioRoutingModule } from './relatorio-routing.module';
 import { DataTablesModule } from 'angular-datatables';
@@ -10,7 +11,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { AtividadeRelatorioListComponent } from './atividadeRelatorio-list/atividadeRelatorio-list.component';
 
 // Components Routing
 
@@ -27,8 +27,8 @@ import { AtividadeRelatorioListComponent } from './atividadeRelatorio-list/ativi
 
   ],
   declarations: [
-    AtividadeRelatorioListComponent,
-    RelatorioFormComponent
+    RelatorioFormComponent,
+    RelatorioListComponent
   ]
 })
 export class RelatorioModule { }

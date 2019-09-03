@@ -75,8 +75,8 @@ export const navItems: NavData[] = [
     icon: 'icon-file',
     children: [
       {
-        name: 'Minhas atividades',
-        url: '/relatorio/atividadesRelatorio',
+        name: 'Meus relatórios',
+        url: '/relatorio/relatorio',
         icon: 'icon-user'
       },
 
