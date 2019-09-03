@@ -4,6 +4,9 @@ import { UsuarioListComponent } from './usuario/usuario-list/usuario-list.compon
 import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
 import { PerfilListComponent } from './perfil/perfil-list/perfil-list.component';
 import { PerfilFormComponent } from './perfil/perfil-form/perfil-form.component';
+import { LogListComponent } from './log/log-list/log-list.component';
+import { AtividadeListComponent } from './atividade/atividade-list/atividade-list.component';
+import { AtividadeFormComponent } from './atividade/atividade-form/atividade-form.component';
 
 
 
@@ -32,6 +35,20 @@ const routes: Routes = [
           { path: "", component: PerfilListComponent, data: { title: 'Perfil'} },
           { path: "new", component: PerfilFormComponent, data: { title: 'Perfil'} },
           { path: ":id/edit", component: PerfilFormComponent, data: { title: 'Perfil'} }
+        ]
+      },
+      {
+        path: 'atividade',
+        children: [
+          { path: "", component: AtividadeListComponent, data: { title: 'Atividade'} },
+          { path: "new", component: AtividadeFormComponent, data: { title: 'Atividade'} },
+          { path: ":id/edit", component: AtividadeFormComponent, data: { title: 'Atividade'} }
+        ]
+      },
+      {
+        path: 'log',
+        children: [
+          { path: "", component: LogListComponent, data: { title: 'Log'} },
         ]
       }
     ]

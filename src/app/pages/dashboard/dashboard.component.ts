@@ -8,6 +8,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
+  usuario:any;  
 
   // lineChart1
   public lineChart1Data: Array<any> = [
@@ -378,6 +379,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));

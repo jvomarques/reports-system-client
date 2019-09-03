@@ -8,19 +8,14 @@ import { MessageService } from '../../../../services/message.service';
 import {Location} from '@angular/common';
 
 @Component({
-  templateUrl: 'usuario-form.component.html'
+  templateUrl: 'atividade-form.component.html'
 })
 
 @Injectable() 
-export class UsuarioFormComponent {
+export class AtividadeFormComponent {
 
   tipoTela:any;
   resourceForm: FormGroup;
-  
-  resPerfis:Array<any> = [];
-  resPerfisEscolhidos:Array<any> = [];
-  perfilEscolhido:any;
-
   protected formBuilder: FormBuilder;
 
   messageService: MessageService = new MessageService();
@@ -32,35 +27,25 @@ export class UsuarioFormComponent {
 
   ) { }
 
-
+  
   ngOnInit(){
     this.buildResourceForm();
     this.verificarTipoAcao();
-    this.getPerfis();
   }
 
   buildResourceForm() {
 
     this.resourceForm = new FormGroup({
       'id': new FormControl(0),
-      'perfil': new FormControl(null, [Validators.required]),
-      'nome': new FormControl(null, [Validators.required]),
-      'login': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'senha': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      'descricao': new FormControl(null, [Validators.required]),
+      'dataInicio': new FormControl(null, [Validators.required]),
+      'dataFim': new FormControl(null, [Validators.required]),
     });
 
   }
 
   validarForm(): boolean {
-    console.log(this.resourceForm);
     return (this.resourceForm.valid) ? true : false;
-  }
-
-  changePerfil(event){
-    console.log(event);
-    this.perfilEscolhido = JSON.parse(JSON.stringify(event));
-    console.log(this.perfilEscolhido);
-    this.resPerfisEscolhidos.push(this.perfilEscolhido);
   }
 
   verificarTipoAcao(){
@@ -71,13 +56,12 @@ export class UsuarioFormComponent {
         this.tipoTela = 'Editar';
         
         const id = this.route.snapshot.url[0].path;
-        this.service.getById('usuario', id).subscribe(
+        this.service.getById('atividade', id).subscribe(
           res => {
             console.log(res);
             this.resourceForm.patchValue({
-              nome: res.nome,
-              login: res.login,
-              id: res.id
+              id: res.id,
+              descricao: res.descricao,
             })
           }
         )
@@ -85,13 +69,15 @@ export class UsuarioFormComponent {
     } else {
       this.tipoTela = 'Cadastrar';
     }
+
+    console.log(this.tipoTela);
   }
 
   salvar():void{
     if(this.validarForm())
     {
       console.log(this.resourceForm);
-      this.service.post('usuario',this.resourceForm.value).subscribe(
+      this.service.post('atividade',this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
@@ -109,7 +95,7 @@ export class UsuarioFormComponent {
     {
       console.log(this.resourceForm);
       const id = this.route.snapshot.url[0].path;
-      this.service.put('usuario/'+ id, this.resourceForm.value).subscribe(
+      this.service.put('atividade/'+ id, this.resourceForm.value).subscribe(
         (res) => {
           console.log(res);
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
@@ -122,13 +108,8 @@ export class UsuarioFormComponent {
     }
   }
 
-  protected getPerfis(){
-    this.service.get('perfil').subscribe(
-      res => {
-        console.log(res);
-        this.resPerfis = res;
-      }
-    )
+  limpar():void{
+    this.resourceForm.reset();
   }
 
 }

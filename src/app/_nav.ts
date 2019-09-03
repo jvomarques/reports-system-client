@@ -57,6 +57,16 @@ export const navItems: NavData[] = [
         url: '/painelControle/perfil',
         icon: 'icon-user'
       },
+      {
+        name: 'Atividade',
+        url: '/painelControle/atividade',
+        icon: 'icon-user'
+      },
+      {
+        name: 'Log',
+        url: '/painelControle/log',
+        icon: 'icon-user'
+      },
     ]
   },
   {

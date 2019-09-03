@@ -45,6 +45,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { DataTablesModule } from 'angular-datatables';
+import { LogService } from './services/log.service';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import { DataTablesModule } from 'angular-datatables';
 
   },
   ApiService,
+  LogService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
 import { map, catchError } from "rxjs/operators";
 import { throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HttpHeaders } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
+import { LogService } from './log.service';
+import { HttpClient } from 'selenium-webdriver/http';
 
 
 @Injectable({
@@ -14,19 +16,34 @@ import { HttpModule } from '@angular/http';
 export class ApiService {
 
   private readonly API = `${environment.API}`+'/api';
-
+  protected httpClient: HttpClient;
+  protected headers: HttpHeaders;
 
   constructor(private http: Http, 
-    private router: Router
-    ) { }
+    private router: Router,
+
+    ) { 
+
+    }
 
   get(url: string) {
-    return this.request(url, RequestMethod.Get);
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new Headers(this.getHeadersAuthorization()), 
+    };
+    
+    return this.http.get(`${this.API}/${url}`, requestOptions).pipe(
+      map((res: Response) => res.json()))
   }
 
-  getById(url: string, id: any) {
-    return this.request(url+'/'+id, RequestMethod.Get);
+  getById(url: string, id:any) {
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new Headers(this.getHeadersAuthorization()), 
+    };
+    
+    return this.http.get(`${this.API}/${url}/`+id, requestOptions).pipe(
+      map((res: Response) => res.json()))
   }
+  
 
   post(url: string, body: Object) {
     return this.request(url, RequestMethod.Post, body);
@@ -55,9 +72,8 @@ export class ApiService {
       headers: headers
     });
 
-    if (body) {
+    if (body) 
       requestOptions.body = body;
-    }
 
     const request = new Request(requestOptions);
     return this.http.request(request)
@@ -90,6 +106,20 @@ export class ApiService {
     }
 
     return throwError(error);
+  }
+
+
+  protected getHeadersAuthorization():any {
+    const token = localStorage.getItem('token');
+
+    const header = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Authorization': 'bearer ' + token
+    }
+
+    return header;
   }
 
 }

@@ -6,12 +6,13 @@ import { MessageService } from '../../../../services/message.service';
 
 
 @Component({
-  templateUrl: 'usuario-list.component.html'
+  templateUrl: 'atividade-list.component.html'
 })
-export class UsuarioListComponent {
+export class AtividadeListComponent {
+
   dtOptions: DataTables.Settings = {};
 
-  usuarios: Array<any> = [];
+  atividades: Array<any> = [];
 
   messageService: MessageService = new MessageService();
 
@@ -21,7 +22,7 @@ export class UsuarioListComponent {
   ) { }
 
   ngOnInit(){
-    this.registrarLog('usuario-list');
+
     this.dtOptions = {
       responsive: true,
       stateSave: true,
@@ -38,51 +39,33 @@ export class UsuarioListComponent {
       
     };
 
-    this.getUsuarios();
+    this.getAtividades();
   }
 
-  registrarLog(acao: any){
-    let usuario = JSON.parse(localStorage.getItem('usuario'));
-    let now = new Date();
-
-    let body = {
-      acao: acao, 
-      data: JSON.stringify(now), 
-      usuario: usuario
-    }
-    console.log(body);
-    this.apiService.post('log', body).subscribe(
+  protected getAtividades(){
+    this.apiService.get('atividade').subscribe(
       res => {
         console.log(res);
-      },
-      error => {
-        console.log(error);
+        this.atividades = res;
       }
     )
   }
 
-  protected getUsuarios(){
-    this.apiService.get('usuario').subscribe(
-      res => {
-        console.log(res);
-        this.usuarios = res;
-      }
-    )
-  }
 
 
   deleteResource(resource) {
     this.messageService
-      .confirm('Deseja realmente excluir este item?', 'Exclusão realizada com sucesso', 'warning')
+      .confirm('Deseja realmente excluir este item?', 'Exclusão processada com sucesso', 'warning')
       .then((result) => {
         if (result.value) {
-          // const firstObject = Object.keys(resource)[0];
+          
           this.apiService.delete('usuario/' + resource.id).subscribe(
             () => {
-              this.messageService.successMessage('Sucesso', 'Exclusão realizada com sucesso');
-              this.usuarios = this.usuarios.filter(element => element != resource);
-              console.log(this.usuarios);
+              this.messageService.successMessage('Sucesso', 'Exclusão processada com sucesso');
+              this.atividades = this.atividades.filter(element => element != resource);
+              console.log(this.atividades);
             }, (fail) => {
+              
               this.messageService.errorMessage('AVISO!', 'Não foi possível realizar exclusão.');
             }
           );

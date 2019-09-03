@@ -37,14 +37,15 @@ export class AuthService {
   private setSession(authResult) {
     const token = authResult.accessToken;
     const tokenExpiration = authResult.expiration;
-    let user = JSON.parse(JSON.stringify(authResult.user));
+    let user = JSON.stringify(authResult.user);
     const perfil = authResult.perfil;
     
     console.log(user);
     
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpiration', tokenExpiration);
-    localStorage.setItem('nomeUsuario', user.nome);
+    // localStorage.setItem('nomeUsuario', JSON.parse(user.nome));
+    localStorage.setItem('usuario', user);
     localStorage.setItem('perfil', authResult.perfil);
   }
 

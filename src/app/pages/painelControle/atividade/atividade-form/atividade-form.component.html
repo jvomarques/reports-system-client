@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    
+    <div class="row">
+      
+      <div class="col-md-12">
+        
+        <div class="card">
+          <div class="card-header">
+            <strong>{{tipoTela}}</strong> Atividade
+          </div>
+          <div class="card-body">
+            <form [formGroup]="resourceForm">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Descrição</label>
+                        <input formControlName="descricao" type="text" id="descricao" name="descricao" 
+                        [ngClass]="{'is-valid': this.resourceForm.get('descricao').value, 'is-invalid' : !this.resourceForm.get('descricao').value }"
+                        class="form-control" placeholder="Descrição" >
+                        <div *ngIf="!this.resourceForm.get('descricao').value" class="invalid-feedback">
+                          Campo obrigatório
+                        </div>
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="dataInicio">Início</label>
+                        <input formControlName="dataInicio" type="date" id="dataInicio" name="dataInicio" 
+                        [ngClass]="{'is-valid': this.resourceForm.get('dataInicio').value, 'is-invalid' : !this.resourceForm.get('dataInicio').value }"
+                        class="form-control" placeholder="" >
+                        <div *ngIf="!this.resourceForm.get('dataInicio').value" class="invalid-feedback">
+                          Campo obrigatório
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="dataFim">Fim</label>
+                        <input formControlName="dataFim" type="date" id="dataFim" name="dataFim" 
+                        [ngClass]="{'is-valid': this.resourceForm.get('dataFim').value, 'is-invalid' : !this.resourceForm.get('dataFim').value }"
+                        class="form-control" placeholder="dataFim" >
+                        <div *ngIf="!this.resourceForm.get('dataFim').value" class="invalid-feedback">
+                          Campo obrigatório
+                        </div>
+                      </div>
+                  </div>
+
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="reset" class="btn btn-sm btn-danger" (click)="limpar()"><i class="fa fa-ban"></i> Limpar</button>
+            <button *ngIf="this.tipoTela == 'Cadastrar'" (click)="salvar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
+            <button *ngIf="this.tipoTela == 'Editar'"  (click)="atualizar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Editar</button>
+          </div>
+        </div>
+
+      </div><!--/.col-->
+    </div><!--/.row-->
+
+  </div>

@@ -13,7 +13,7 @@ export class DefaultLayoutComponent implements OnDestroy, OnInit {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  nomeUsuario:any;  
+  usuario:any;  
   
   constructor(@Inject(DOCUMENT) _document?: any) {
 
@@ -28,16 +28,16 @@ export class DefaultLayoutComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(){
-    this.nomeUsuario = localStorage.getItem('nomeUsuario');
-    // const usuario 
-    console.log(this.nomeUsuario);
-
+    // this.usuario.nome = '';
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    console.log(this.usuario);
   }
 
   ngOnDestroy(): void {
     this.changes.disconnect();
-    this.nomeUsuario = localStorage.getItem('nomeUsuario');
-    
+    // this.usuario.nome = '';
 
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    
   }
 }
