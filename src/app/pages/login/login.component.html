@@ -15,7 +15,7 @@
                     </div>
                     <input formControlName="login" type="text" class="form-control" 
                     [ngClass]="{'is-valid': this.resourceForm.get('login').value, 'is-invalid' : !this.resourceForm.get('login').value }"
-                    placeholder="Login" autocomplete="username" required>
+                    placeholder="Login" required>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
@@ -23,7 +23,7 @@
                     </div>
                     <input formControlName="senha" type="password" class="form-control" 
                     [ngClass]="{'is-valid': this.resourceForm.get('senha').value, 'is-invalid' : !this.resourceForm.get('senha').value }"
-                    placeholder="Senha" autocomplete="current-password" required>
+                    placeholder="Senha" required>
                   </div>
                   <div class="row">
                     <div class="col-6">

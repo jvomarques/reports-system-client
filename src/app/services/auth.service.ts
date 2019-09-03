@@ -16,7 +16,6 @@ export class AuthService {
     private apiService: ApiService,
     private router: Router,
     private messageService: MessageService,
-    private moment: moment.Moment
   ) { }
 
   login(login:string, senha:string){
@@ -30,8 +29,6 @@ export class AuthService {
         }
         else if(!authResult.authenticated){
           this.messageService.errorMessage("Atenção", authResult.message);
-
-          // console.error(error);
         }
       }
     )
@@ -40,12 +37,14 @@ export class AuthService {
   private setSession(authResult) {
     const token = authResult.accessToken;
     const tokenExpiration = authResult.expiration;
-    const user = authResult.user;
+    let user = JSON.parse(JSON.stringify(authResult.user));
     const perfil = authResult.perfil;
-
+    
+    console.log(user);
+    
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpiration', tokenExpiration);
-    localStorage.setItem('user', user);
+    localStorage.setItem('nomeUsuario', user.nome);
     localStorage.setItem('perfil', authResult.perfil);
   }
 

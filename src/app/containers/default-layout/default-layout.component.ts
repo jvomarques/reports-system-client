@@ -8,11 +8,13 @@ import { navItems } from '../../_nav';
   templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent implements OnDestroy, OnInit {
+  
   public navItems = navItems;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  usuario:any;  
+  nomeUsuario:any;  
+  
   constructor(@Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
@@ -26,14 +28,16 @@ export class DefaultLayoutComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(){
-    // this.usuario = localStorage.getItem('usuario');
-    this.usuario = "Joao Victor";
-    // this.usuario = localStorage.getItem('usuario');
+    this.nomeUsuario = localStorage.getItem('nomeUsuario');
+    // const usuario 
+    console.log(this.nomeUsuario);
+
   }
 
   ngOnDestroy(): void {
     this.changes.disconnect();
-    this.usuario = "Joao Victor";
+    this.nomeUsuario = localStorage.getItem('nomeUsuario');
+    
 
   }
 }
