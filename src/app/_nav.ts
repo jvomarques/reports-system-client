@@ -53,7 +53,7 @@ export const navItems: NavData[] = [
         icon: 'icon-user'
       },
       {
-        name: 'Pefil',
+        name: 'Perfil',
         url: '/painelControle/perfil',
         icon: 'icon-user'
       },
@@ -67,6 +67,19 @@ export const navItems: NavData[] = [
         url: '/painelControle/log',
         icon: 'icon-user'
       },
+    ]
+  },
+  {
+    name: 'Relatórios',
+    url: '/relatorio',
+    icon: 'icon-file',
+    children: [
+      {
+        name: 'Minhas atividades',
+        url: '/relatorio/atividadesRelatorio',
+        icon: 'icon-user'
+      },
+
     ]
   },
   {

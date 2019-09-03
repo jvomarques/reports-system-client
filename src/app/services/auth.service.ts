@@ -61,13 +61,16 @@ export class AuthService {
 
   usuarioEhAdmin():boolean{
     let perfis = localStorage.getItem('perfil');
-
-    // perfis.forEach(perfil => {
-    //   if(perfil == "Administrator")
-    //     return true;
-    // });
-
-    return true;  
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let idPerfil = usuario.idPerfil;
+    console.log(usuario);
+    
+    // return true;
+    if(idPerfil == '1')
+      return true;
+    else
+      return false;
+    
   }
 
   // getTokenExpirationDate(token: string): Date {

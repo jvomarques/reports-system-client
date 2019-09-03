@@ -58,6 +58,12 @@ export const routes: Routes = [
         canLoad:[AdminGuard, AuthGuard],
         
       },
+      {
+        path: 'relatorio',
+        loadChildren: () => import('./pages/relatorio/relatorio.module').then(m => m.RelatorioModule),
+        canLoad:[AuthGuard],
+        
+      },
 
       {
         path: 'charts',

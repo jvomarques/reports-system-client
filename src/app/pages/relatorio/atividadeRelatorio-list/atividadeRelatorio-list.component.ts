@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-import { ApiService } from '../../../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { Location } from '@angular/common';
-import { MessageService } from '../../../../services/message.service';
+import { MessageService } from '../../../services/message.service';
 
 
 @Component({
-  templateUrl: 'atividade-list.component.html'
+  templateUrl: 'atividadeRelatorio-list.component.html'
 })
-export class AtividadeListComponent {
+export class AtividadeRelatorioListComponent {
 
   dtOptions: DataTables.Settings = {};
 

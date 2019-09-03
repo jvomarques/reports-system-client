@@ -1,18 +1,18 @@
-import { ApiService } from '../../../../services/api.service';
+import { MessageService } from './../../../services/message.service';
+import { ApiService } from './../../../services/api.service';
 import { Component, Injectable } from '@angular/core';
 import Swal from 'sweetalert2'
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { MessageService } from '../../../../services/message.service';
 import {Location} from '@angular/common';
 
 @Component({
-  templateUrl: 'atividade-form.component.html'
+  templateUrl: 'relatorio-form.component.html'
 })
 
 @Injectable() 
-export class AtividadeFormComponent {
+export class RelatorioFormComponent {
 
   tipoTela:any;
   resourceForm: FormGroup;
