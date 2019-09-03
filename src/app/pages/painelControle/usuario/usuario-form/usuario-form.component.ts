@@ -38,8 +38,8 @@ export class UsuarioFormComponent {
   buildResourceForm() {
 
     this.resourceForm = new FormGroup({
+      'id': new FormControl(0),
       'nome': new FormControl(null, [Validators.required]),
-      'idPerfil': new FormControl(null, [Validators.required]),
       'login': new FormControl(null, [Validators.required, Validators.minLength(6)]),
       'senha': new FormControl(null, [Validators.required, Validators.minLength(6)]),
     });
@@ -47,6 +47,7 @@ export class UsuarioFormComponent {
   }
 
   validarForm(): boolean {
+    console.log(this.resourceForm);
     return (this.resourceForm.valid) ? true : false;
   }
 
@@ -63,7 +64,8 @@ export class UsuarioFormComponent {
             console.log(res);
             this.resourceForm.patchValue({
               nome: res.nome,
-              login: res.login
+              login: res.login,
+              id: res.id
             })
           }
         )

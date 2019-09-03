@@ -35,8 +35,7 @@ export class MessageService {
       title: title,
       text: subtitle,
       type: 'error',
-      showConfirmButton: false,
-      timer: 2000
+      showConfirmButton: true,
     });
   }
   /**
