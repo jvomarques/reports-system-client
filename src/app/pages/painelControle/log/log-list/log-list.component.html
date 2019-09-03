@@ -15,6 +15,7 @@
                 <tr>
                   <th class="text-center">#</th>
                   <th class="text-center">Usuário</th>
+                  <th class="text-center">Pagina</th>
                   <th class="text-center">Data</th>
                   <th class="text-center">Ação</th>
 
@@ -26,10 +27,13 @@
                     <small>{{i+1}}</small>
                   </td>
                   <td class="text-center">
-                    <!-- <small>{{res.usuario.nome}}</small> -->
+                    <small>{{res.idUsuario}}</small>
                   </td>    
                   <td class="text-center">
-                    <small>{{res.data}}</small>
+                    <small>{{res.paginaAcessada}}</small>
+                  </td>     
+                  <td class="text-center">
+                    <small>{{res.data | date}}</small>
                   </td>                
                   <td class="text-center">
                     <small>{{res.acao}}</small>

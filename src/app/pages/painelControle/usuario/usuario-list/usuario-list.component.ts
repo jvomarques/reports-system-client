@@ -21,7 +21,8 @@ export class UsuarioListComponent {
   ) { }
 
   ngOnInit(){
-    this.registrarLog('usuario-list');
+    this.registrarLog('usuario-list', 'list');
+
     this.dtOptions = {
       responsive: true,
       stateSave: true,
@@ -41,14 +42,16 @@ export class UsuarioListComponent {
     this.getUsuarios();
   }
 
-  registrarLog(acao: any){
+  registrarLog(paginaAcessada: any, acao: any){
+
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     let now = new Date();
 
     let body = {
       acao: acao, 
-      data: JSON.stringify(now), 
-      usuario: usuario
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
     }
     console.log(body);
     this.apiService.post('log', body).subscribe(
@@ -81,6 +84,8 @@ export class UsuarioListComponent {
             () => {
               this.messageService.successMessage('Sucesso', 'Exclusão realizada com sucesso');
               this.usuarios = this.usuarios.filter(element => element != resource);
+              this.registrarLog('usuario-list', 'delete');
+
               console.log(this.usuarios);
             }, (fail) => {
               this.messageService.errorMessage('AVISO!', 'Não foi possível realizar exclusão.');

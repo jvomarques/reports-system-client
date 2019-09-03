@@ -43,16 +43,16 @@ export class UsuarioFormComponent {
 
     this.resourceForm = new FormGroup({
       'id': new FormControl(0),
-      'perfil': new FormControl(null, [Validators.required]),
+      'idPerfil': new FormControl(null, [Validators.required]),
       'nome': new FormControl(null, [Validators.required]),
-      'login': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'senha': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      'login': new FormControl(null, [Validators.required]),
+      'senha': new FormControl(null, [Validators.required]),
     });
 
   }
 
   validarForm(): boolean {
-    console.log(this.resourceForm);
+    console.log(this.resourceForm.get('login'));
     return (this.resourceForm.valid) ? true : false;
   }
 
@@ -77,7 +77,8 @@ export class UsuarioFormComponent {
             this.resourceForm.patchValue({
               nome: res.nome,
               login: res.login,
-              id: res.id
+              id: res.id,
+              idPerfil: res.idPerfil
             })
           }
         )
@@ -90,10 +91,10 @@ export class UsuarioFormComponent {
   salvar():void{
     if(this.validarForm())
     {
-      console.log(this.resourceForm);
       this.service.post('usuario',this.resourceForm.value).subscribe(
         (res) => {
-          console.log(res);
+          this.registrarLog('usuario-form', 'post');
+          
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }
@@ -107,11 +108,10 @@ export class UsuarioFormComponent {
   atualizar():void{
     if(this.validarForm())
     {
-      console.log(this.resourceForm);
       const id = this.route.snapshot.url[0].path;
       this.service.put('usuario/'+ id, this.resourceForm.value).subscribe(
         (res) => {
-          console.log(res);
+          this.registrarLog('usuario-form', 'put');
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }
@@ -127,6 +127,31 @@ export class UsuarioFormComponent {
       res => {
         console.log(res);
         this.resPerfis = res;
+      }
+    )
+  }
+
+  limpar(){
+    this.resourceForm.reset();
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.service.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
       }
     )
   }

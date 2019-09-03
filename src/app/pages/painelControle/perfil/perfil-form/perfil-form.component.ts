@@ -75,7 +75,8 @@ export class PerfilFormComponent {
       console.log(this.resourceForm);
       this.service.post('perfil',this.resourceForm.value).subscribe(
         (res) => {
-          console.log(res);
+          this.registrarLog('perfil-form', 'post');
+          
           this.messageService.successMessage('Sucesso', 'Solicitação processada com sucesso');
           this.location.back();
       }
@@ -89,7 +90,8 @@ export class PerfilFormComponent {
   atualizar():void{
     if(this.validarForm())
     {
-      console.log(this.resourceForm);
+      this.registrarLog('perfil-form', 'put');
+      
       const id = this.route.snapshot.url[0].path;
       this.service.put('perfil/'+ id, this.resourceForm.value).subscribe(
         (res) => {
@@ -106,6 +108,27 @@ export class PerfilFormComponent {
 
   limpar():void{
     this.resourceForm.reset();
+  }
+
+  registrarLog(paginaAcessada: any, acao: any){
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let now = new Date();
+
+    let body = {
+      acao: acao, 
+      paginaAcessada: paginaAcessada,
+      data: now, 
+      idUsuario: usuario.id
+    }
+    this.service.post('log', body).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }

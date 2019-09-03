@@ -11,7 +11,7 @@
           <div class="card-body">
             <form [formGroup]="resourceForm">
               <div class="row">
-                <div class="form-group col-md-6">
+                  <div class="form-group col-md-6">
                     <label for="nome">Nome</label>
                     <input formControlName="nome" type="text" id="nome" name="nome" 
                     [ngClass]="{'is-valid': this.resourceForm.get('nome').value, 'is-invalid' : !this.resourceForm.get('nome').value }"
@@ -29,6 +29,7 @@
                       Campo obrigatório
                     </div>
                   </div>
+
               </div>
               <div class="row">
                   <div class="form-group col-md-6">
@@ -44,11 +45,11 @@
 
                   <div class="form-group col-md-6">
                       <label for="perfil">Perfil</label>
-                      <select  class="form-control" id="perfil" [(ngModel)]="perfilEscolhido" #perfil="ngModel">
+                      <select  class="form-control" id="idPerfil" formControlName="idPerfil" [ngClass]="{'is-valid': this.resourceForm.get('idPerfil').value, 'is-invalid' : !this.resourceForm.get('idPerfil').value }">
                         <option value="" selected disabled >Escolha um perfil</option>
-                        <option *ngFor="let perfil of resPerfis; index as i">{{perfil.descricao}}</option>
+                        <option *ngFor="let perfil of resPerfis; index as i" [ngValue]="perfil.id">{{perfil.descricao}}</option>
                       </select>
-                      <div *ngIf="this.resourceForm.get('perfil').value == ''" class="invalid-feedback">
+                      <div *ngIf="!this.resourceForm.get('idPerfil').value" class="invalid-feedback">
                           Campo obrigatório
                       </div>
                   </div>
@@ -59,7 +60,7 @@
             </form>
           </div>
           <div class="card-footer">
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Limpar</button>
+            <button (click)="limpar()" type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Limpar</button>
             <button *ngIf="this.tipoTela == 'Cadastrar'" (click)="salvar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
             <button *ngIf="this.tipoTela == 'Editar'"  (click)="atualizar()" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Editar</button>
           </div>
@@ -71,4 +72,3 @@
     <!--/.row-->
 
   </div>
-  {{perfilEscolhido}}
