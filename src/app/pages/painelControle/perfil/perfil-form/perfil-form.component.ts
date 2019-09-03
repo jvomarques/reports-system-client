@@ -36,6 +36,7 @@ export class PerfilFormComponent {
   buildResourceForm() {
 
     this.resourceForm = new FormGroup({
+      'id': new FormControl(0),
       'descricao': new FormControl(null, [Validators.required]),
     });
 
@@ -57,6 +58,7 @@ export class PerfilFormComponent {
           res => {
             console.log(res);
             this.resourceForm.patchValue({
+              id: res.id,
               descricao: res.descricao,
             })
           }
